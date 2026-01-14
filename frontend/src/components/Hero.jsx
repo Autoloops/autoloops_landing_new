@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -36,28 +35,15 @@ const Hero = () => {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-32 relative">
         <div className="flex flex-col items-center text-center relative">
-          {/* Main Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-6"
-          >
-            <span className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-teal-50 to-blue-50 border border-teal-200/50 text-sm font-medium text-teal-700 mb-8">
-              <Sparkles className="inline w-4 h-4 mr-2" />
-              Autoloops Agents working 24/7
-            </span>
-          </motion.div>
-
           {/* Card above hero text */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="mb-8"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-12"
           >
             <img
-              src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/yctu3lnm_Card.png"
+              src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/83mmjeg5_Card.png"
               alt="Autoloops Card"
               className="max-w-md w-full h-auto rounded-2xl shadow-lg"
             />

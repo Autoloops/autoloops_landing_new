@@ -27,7 +27,7 @@ const Navbar = () => {
             <img
               src="https://customer-assets.emergentagent.com/job_5837fc7d-bec0-4081-8e2e-fc389de70796/artifacts/hsuz0zsw_Gemini_Generated_Image_ksrag6ksrag6ksra.png"
               alt="Autoloops Logo"
-              className="h-14 w-14"
+              className="h-12 w-auto"
             />
             <span className="text-2xl font-bold">
               <span className="text-slate-900">Auto</span>
