@@ -33,32 +33,32 @@ const Hero = () => {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-32 relative">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-20 relative">
         <div className="flex flex-col items-center text-center relative">
-          {/* Three Cards Layout */}
+          {/* Three Cards Layout - Staggered */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="mb-12 relative w-full max-w-6xl"
+            className="mb-8 relative w-full max-w-6xl"
           >
-            <div className="flex items-center justify-center gap-8 relative">
-              {/* Left Card - Winning Creative Ideas */}
+            <div className="flex items-center justify-center gap-6 relative">
+              {/* Left Card - Slightly higher and smaller */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="relative hidden lg:block"
+                className="relative hidden lg:block -mt-8"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-400/20 to-blue-400/20 rounded-2xl blur-2xl"></div>
                 <img
-                  src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/g3bog4tg_Frame%201.png"
+                  src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/ipiktsia_Frame%201.png"
                   alt="Winning Creative Ideas"
-                  className="relative w-80 h-auto rounded-2xl shadow-xl"
+                  className="relative w-64 h-auto rounded-2xl shadow-xl"
                 />
               </motion.div>
 
-              {/* Center Card - Main Card */}
+              {/* Center Card - Largest */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -67,24 +67,24 @@ const Hero = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-teal-500/30 to-blue-500/30 rounded-2xl blur-3xl"></div>
                 <img
-                  src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/vx0nf8v1_Card.png"
+                  src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/jw53jjh1_Card.png"
                   alt="Proactive Suggestions"
-                  className="relative w-96 md:w-[28rem] h-auto rounded-2xl shadow-2xl"
+                  className="relative w-full md:w-[32rem] h-auto rounded-2xl shadow-2xl"
                 />
               </motion.div>
 
-              {/* Right Card - Weekly Reports */}
+              {/* Right Card - Slightly lower and smaller */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="relative hidden lg:block"
+                className="relative hidden lg:block mt-8"
               >
                 <div className="absolute inset-0 bg-gradient-to-l from-blue-400/20 to-teal-400/20 rounded-2xl blur-2xl"></div>
                 <img
-                  src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/dvropemr_Frame%202.png"
+                  src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/by5caqzf_Frame%202.png"
                   alt="Weekly Reports"
-                  className="relative w-80 h-auto rounded-2xl shadow-xl"
+                  className="relative w-64 h-auto rounded-2xl shadow-xl"
                 />
               </motion.div>
             </div>
@@ -130,15 +130,6 @@ const Hero = () => {
               Watch Demo
             </button>
           </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
-            className="text-sm text-slate-500 mt-8"
-          >
-            No credit card required • 5 minute setup • Cancel anytime
-          </motion.p>
         </div>
       </div>
 
