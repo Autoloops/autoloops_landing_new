@@ -42,17 +42,17 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="mb-8 relative w-full max-w-6xl"
           >
-            <div className="flex items-center justify-center gap-6 relative">
-              {/* Left Card - Slightly higher and smaller */}
+            <div className="flex items-end justify-center gap-6 relative">
+              {/* Left Card - Aligned bottom with frame2, slightly above card */}
               <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="relative hidden lg:block -mt-8"
+                className="relative hidden lg:block mb-8"
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-teal-400/20 to-blue-400/20 rounded-2xl blur-2xl"></div>
                 <img
-                  src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/ipiktsia_Frame%201.png"
+                  src="/assets/images/hero-frame-1.png"
                   alt="Winning Creative Ideas"
                   className="relative w-64 h-auto rounded-2xl shadow-xl"
                 />
@@ -67,22 +67,22 @@ const Hero = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-teal-500/30 to-blue-500/30 rounded-2xl blur-3xl"></div>
                 <img
-                  src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/jw53jjh1_Card.png"
+                  src="/assets/images/hero-card.png"
                   alt="Proactive Suggestions"
                   className="relative w-full md:w-[32rem] h-auto rounded-2xl shadow-2xl"
                 />
               </motion.div>
 
-              {/* Right Card - Slightly lower and smaller */}
+              {/* Right Card - Aligned bottom with frame1, slightly above card */}
               <motion.div
                 initial={{ opacity: 0, x: 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="relative hidden lg:block mt-8"
+                className="relative hidden lg:block mb-8"
               >
                 <div className="absolute inset-0 bg-gradient-to-l from-blue-400/20 to-teal-400/20 rounded-2xl blur-2xl"></div>
                 <img
-                  src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/by5caqzf_Frame%202.png"
+                  src="/assets/images/hero-frame-2.png"
                   alt="Weekly Reports"
                   className="relative w-64 h-auto rounded-2xl shadow-xl"
                 />
@@ -94,12 +94,12 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight mb-6 max-w-5xl"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-none mb-6 max-w-5xl"
           >
-            AI Agents that{' '}
-            <span className="bg-gradient-to-r from-teal-700 to-sky-500 bg-clip-text text-transparent">
+            <span className="inline-block">AI Agents that{' '}
+            <span className="bg-gradient-to-r from-teal-700 to-sky-500 bg-clip-text text-transparent whitespace-nowrap">
               scale your Meta ads
-            </span>
+            </span></span>
           </motion.h1>
 
           <motion.p

@@ -124,12 +124,6 @@ const Features = () => {
               >
                 Contact Us
               </button>
-              <button
-                data-testid="features-demo-button"
-                className="h-14 px-10 rounded-full bg-white/10 backdrop-blur-sm text-white border-2 border-white/20 font-semibold text-lg hover:bg-white/20 transition-all duration-200"
-              >
-                Schedule Demo
-              </button>
             </div>
           </div>
         </motion.div>

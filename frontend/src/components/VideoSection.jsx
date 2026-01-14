@@ -64,7 +64,7 @@ const VideoSection = () => {
               ) : (
                 <div className="absolute inset-0 opacity-50">
                   <img
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&q=85"
+                    src="/assets/images/video-placeholder.jpg"
                     alt="Dashboard Preview"
                     className="w-full h-full object-cover"
                   />
@@ -97,9 +97,9 @@ const VideoSection = () => {
           </div>
           <div className="text-center">
             <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-teal-700 to-sky-500 bg-clip-text text-transparent mb-2">
-              5 min
+              10+ hrs
             </div>
-            <div className="text-slate-600 font-medium">Setup time, no code required</div>
+            <div className="text-slate-600 font-medium">saved for growth teams weekly</div>
           </div>
         </motion.div>
       </div>

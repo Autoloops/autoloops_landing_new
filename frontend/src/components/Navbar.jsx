@@ -25,7 +25,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-20">
           <div className="flex items-center gap-3">
             <img
-              src="https://customer-assets.emergentagent.com/job_5837fc7d-bec0-4081-8e2e-fc389de70796/artifacts/hsuz0zsw_Gemini_Generated_Image_ksrag6ksrag6ksra.png"
+              src="/assets/images/logo.png"
               alt="Autoloops Logo"
               className="h-12 w-auto"
             />
@@ -36,12 +36,6 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <a href="#features" className="text-slate-600 hover:text-teal-600 font-medium transition-colors">
-              Features
-            </a>
-            <a href="#video" className="text-slate-600 hover:text-teal-600 font-medium transition-colors">
-              How it Works
-            </a>
             <button
               data-testid="nav-cta-button"
               className="h-12 px-8 rounded-full bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
