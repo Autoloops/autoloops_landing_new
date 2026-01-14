@@ -73,41 +73,47 @@ const Hero = () => {
             </div>
           </FloatingCard>
 
-          <FloatingCard delay={0.4} duration={3.5}>
-            <div className="flex items-center gap-3 min-w-[200px]" style={{ position: 'absolute', top: '50%', right: '-280px' }}>
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center">
-                <TrendingUp className="w-5 h-5 text-white" />
+          <div className="absolute top-1/2 right-0 md:right-[-280px]">
+            <FloatingCard delay={0.4} duration={3.5}>
+              <div className="flex items-center gap-3 min-w-[200px]">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs text-slate-500 font-medium">Budget Manager</div>
+                  <div className="text-sm font-semibold text-slate-900">+24% ROAS</div>
+                </div>
               </div>
-              <div className="text-left">
-                <div className="text-xs text-slate-500 font-medium">Budget Manager</div>
-                <div className="text-sm font-semibold text-slate-900">+24% ROAS</div>
-              </div>
-            </div>
-          </FloatingCard>
+            </FloatingCard>
+          </div>
 
-          <FloatingCard delay={0.6} duration={4.5}>
-            <div className="flex items-center gap-3 min-w-[200px]" style={{ position: 'absolute', bottom: '20%', left: '-280px' }}>
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-600 to-sky-500 flex items-center justify-center">
-                <Zap className="w-5 h-5 text-white" />
+          <div className="absolute bottom-[20%] left-0 md:left-[-280px]">
+            <FloatingCard delay={0.6} duration={4.5}>
+              <div className="flex items-center gap-3 min-w-[200px]">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-600 to-sky-500 flex items-center justify-center">
+                  <Zap className="w-5 h-5 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs text-slate-500 font-medium">Bid Optimizer</div>
+                  <div className="text-sm font-semibold text-slate-900">Working now</div>
+                </div>
               </div>
-              <div className="text-left">
-                <div className="text-xs text-slate-500 font-medium">Bid Optimizer</div>
-                <div className="text-sm font-semibold text-slate-900">Working now</div>
-              </div>
-            </div>
-          </FloatingCard>
+            </FloatingCard>
+          </div>
 
-          <FloatingCard delay={0.8} duration={3.8}>
-            <div className="flex items-center gap-3 min-w-[200px]" style={{ position: 'absolute', top: '30%', left: '-280px' }}>
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center">
-                <BarChart3 className="w-5 h-5 text-white" />
+          <div className="absolute top-[30%] left-0 md:left-[-280px]">
+            <FloatingCard delay={0.8} duration={3.8}>
+              <div className="flex items-center gap-3 min-w-[200px]">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center">
+                  <BarChart3 className="w-5 h-5 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-xs text-slate-500 font-medium">Performance Analyst</div>
+                  <div className="text-sm font-semibold text-slate-900">Report ready</div>
+                </div>
               </div>
-              <div className="text-left">
-                <div className="text-xs text-slate-500 font-medium">Performance Analyst</div>
-                <div className="text-sm font-semibold text-slate-900">Report ready</div>
-              </div>
-            </div>
-          </FloatingCard>
+            </FloatingCard>
+          </div>
 
           {/* Main Content */}
           <motion.div
