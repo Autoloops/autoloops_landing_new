@@ -1,30 +1,6 @@
 import React from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Sparkles, TrendingUp, Zap, BarChart3 } from 'lucide-react';
-
-const FloatingCard = ({ children, delay = 0, duration = 3 }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{
-        opacity: 1,
-        y: [0, -20, 0],
-      }}
-      transition={{
-        opacity: { duration: 0.6, delay },
-        y: {
-          duration,
-          repeat: Infinity,
-          ease: 'easeInOut',
-          delay,
-        },
-      }}
-      className="absolute glass rounded-2xl p-4 shadow-lg"
-    >
-      {children}
-    </motion.div>
-  );
-};
+import { motion } from 'framer-motion';
+import { Sparkles } from 'lucide-react';
 
 const Hero = () => {
   return (
@@ -60,61 +36,6 @@ const Hero = () => {
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 py-32 relative">
         <div className="flex flex-col items-center text-center relative">
-          {/* Floating Agent Cards */}
-          <FloatingCard delay={0.2} duration={4}>
-            <div className="flex items-center gap-3 min-w-[200px]">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-500 to-blue-500 flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-white" />
-              </div>
-              <div className="text-left">
-                <div className="text-xs text-slate-500 font-medium">Creative Optimizer</div>
-                <div className="text-sm font-semibold text-slate-900">3 ads paused</div>
-              </div>
-            </div>
-          </FloatingCard>
-
-          <div className="absolute top-1/2 right-0 md:right-[-280px]">
-            <FloatingCard delay={0.4} duration={3.5}>
-              <div className="flex items-center gap-3 min-w-[200px]">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-teal-500 flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-white" />
-                </div>
-                <div className="text-left">
-                  <div className="text-xs text-slate-500 font-medium">Budget Manager</div>
-                  <div className="text-sm font-semibold text-slate-900">+24% ROAS</div>
-                </div>
-              </div>
-            </FloatingCard>
-          </div>
-
-          <div className="absolute bottom-[20%] left-0 md:left-[-280px]">
-            <FloatingCard delay={0.6} duration={4.5}>
-              <div className="flex items-center gap-3 min-w-[200px]">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-teal-600 to-sky-500 flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-white" />
-                </div>
-                <div className="text-left">
-                  <div className="text-xs text-slate-500 font-medium">Bid Optimizer</div>
-                  <div className="text-sm font-semibold text-slate-900">Working now</div>
-                </div>
-              </div>
-            </FloatingCard>
-          </div>
-
-          <div className="absolute top-[30%] left-0 md:left-[-280px]">
-            <FloatingCard delay={0.8} duration={3.8}>
-              <div className="flex items-center gap-3 min-w-[200px]">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center">
-                  <BarChart3 className="w-5 h-5 text-white" />
-                </div>
-                <div className="text-left">
-                  <div className="text-xs text-slate-500 font-medium">Performance Analyst</div>
-                  <div className="text-sm font-semibold text-slate-900">Report ready</div>
-                </div>
-              </div>
-            </FloatingCard>
-          </div>
-
           {/* Main Content */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -126,6 +47,20 @@ const Hero = () => {
               <Sparkles className="inline w-4 h-4 mr-2" />
               Autoloops Agents working 24/7
             </span>
+          </motion.div>
+
+          {/* Card above hero text */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mb-8"
+          >
+            <img
+              src="https://customer-assets.emergentagent.com/job_autoloop-landing/artifacts/yctu3lnm_Card.png"
+              alt="Autoloops Card"
+              className="max-w-md w-full h-auto rounded-2xl shadow-lg"
+            />
           </motion.div>
 
           <motion.h1
@@ -146,7 +81,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="text-lg md:text-xl leading-relaxed text-slate-600 mb-12 max-w-3xl font-medium"
           >
-            Autoloops connects your ad platform, analytics, and creative data to uncover optimization opportunities humans simply can't find. Scale profitably on autopilot.
+            Autoloops connects your ad platform, analytics, and creative data to uncover optimization opportunities humans simply can't find.
           </motion.p>
 
           <motion.div

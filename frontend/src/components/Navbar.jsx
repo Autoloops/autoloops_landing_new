@@ -27,10 +27,11 @@ const Navbar = () => {
             <img
               src="https://customer-assets.emergentagent.com/job_5837fc7d-bec0-4081-8e2e-fc389de70796/artifacts/hsuz0zsw_Gemini_Generated_Image_ksrag6ksrag6ksra.png"
               alt="Autoloops Logo"
-              className="h-10 w-10"
+              className="h-14 w-14"
             />
-            <span className="text-2xl font-bold bg-gradient-to-r from-teal-700 to-sky-500 bg-clip-text text-transparent">
-              Autoloops
+            <span className="text-2xl font-bold">
+              <span className="text-slate-900">Auto</span>
+              <span className="bg-gradient-to-r from-teal-700 to-sky-500 bg-clip-text text-transparent">loops</span>
             </span>
           </div>
 
