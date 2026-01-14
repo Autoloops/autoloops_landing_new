@@ -117,12 +117,15 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 1 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <button
+            <a
+              href="https://calendly.com/anirudh-autoloops/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               data-testid="hero-cta-button"
-              className="h-14 px-10 rounded-full bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="h-14 px-10 rounded-full bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center"
             >
               Contact Us
-            </button>
+            </a>
             <button
               data-testid="hero-demo-button"
               className="h-14 px-10 rounded-full bg-white text-slate-900 border-2 border-slate-200 font-semibold text-lg hover:bg-slate-50 hover:border-teal-200 transition-all duration-200"

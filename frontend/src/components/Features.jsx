@@ -118,12 +118,15 @@ const Features = () => {
               Join hundreds of growth teams using AI to achieve breakthrough performance
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button
+              <a
+                href="https://calendly.com/anirudh-autoloops/30min"
+                target="_blank"
+                rel="noopener noreferrer"
                 data-testid="features-cta-button"
-                className="h-14 px-10 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 text-white font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                className="h-14 px-10 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 text-white font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center"
               >
                 Contact Us
-              </button>
+              </a>
             </div>
           </div>
         </motion.div>

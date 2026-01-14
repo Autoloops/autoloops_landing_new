@@ -36,12 +36,15 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-8">
-            <button
+            <a
+              href="https://calendly.com/anirudh-autoloops/30min"
+              target="_blank"
+              rel="noopener noreferrer"
               data-testid="nav-cta-button"
-              className="h-12 px-8 rounded-full bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+              className="h-12 px-8 rounded-full bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 flex items-center justify-center"
             >
               Contact Us
-            </button>
+            </a>
           </div>
 
           <button
