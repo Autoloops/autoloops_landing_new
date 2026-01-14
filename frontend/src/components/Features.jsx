@@ -122,7 +122,7 @@ const Features = () => {
                 data-testid="features-cta-button"
                 className="h-14 px-10 rounded-full bg-gradient-to-r from-teal-500 to-blue-500 text-white font-semibold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
               >
-                Start Free Trial
+                Contact Us
               </button>
               <button
                 data-testid="features-demo-button"

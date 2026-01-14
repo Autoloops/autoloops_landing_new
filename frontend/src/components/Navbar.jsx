@@ -46,7 +46,7 @@ const Navbar = () => {
               data-testid="nav-cta-button"
               className="h-12 px-8 rounded-full bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
             >
-              Start Free Trial
+              Contact Us
             </button>
           </div>
 
