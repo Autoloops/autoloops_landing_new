@@ -1,0 +1,163 @@
+{
+  "design_system": {
+    "typography": {
+      "font_family": {
+        "headings": "Outfit, sans-serif",
+        "body": "Plus Jakarta Sans, sans-serif",
+        "mono": "JetBrains Mono, monospace"
+      },
+      "weights": {
+        "headings": "font-bold (700) or font-extrabold (800)",
+        "body": "font-medium (500)",
+        "light": "font-light (300)"
+      },
+      "scale": {
+        "h1": "text-5xl md:text-7xl tracking-tight leading-tight",
+        "h2": "text-4xl md:text-5xl tracking-tight",
+        "h3": "text-2xl md:text-3xl tracking-normal",
+        "body_lg": "text-lg md:text-xl leading-relaxed",
+        "body": "text-base leading-relaxed",
+        "caption": "text-sm text-muted-foreground uppercase tracking-widest"
+      }
+    },
+    "colors": {
+      "theme": "light",
+      "palette": {
+        "primary": {
+          "name": "Blue-Teal Gradient",
+          "from": "#0F766E",
+          "to": "#0EA5E9",
+          "gradient_class": "bg-gradient-to-r from-teal-700 to-sky-500"
+        },
+        "background": {
+          "default": "#FFFFFF",
+          "subtle": "#F8FAFC",
+          "dark_section": "#0F172A"
+        },
+        "text": {
+          "primary": "#0F172A",
+          "secondary": "#475569",
+          "muted": "#94A3B8"
+        },
+        "accent": {
+          "name": "Electric Lime",
+          "hex": "#84CC16",
+          "usage": "Notification dots, success states, tiny highlights"
+        },
+        "border": {
+          "default": "#E2E8F0",
+          "active": "#CBD5E1"
+        }
+      }
+    },
+    "spacing": {
+      "container_padding": "px-6 md:px-12 lg:px-24",
+      "section_gap": "py-24 md:py-32",
+      "element_gap": "gap-6 md:gap-8"
+    },
+    "visual_enhancers": {
+      "radius": "rounded-2xl",
+      "shadows": {
+        "card": "shadow-[0_2px_10px_-3px_rgba(6,81,237,0.1)]",
+        "hover": "shadow-[0_20px_40px_-12px_rgba(6,81,237,0.2)]",
+        "glow": "shadow-[0_0_40px_-10px_rgba(14,165,233,0.5)]"
+      },
+      "glassmorphism": {
+        "default": "bg-white/70 backdrop-blur-xl border border-white/20 shadow-sm",
+        "dark": "bg-slate-900/80 backdrop-blur-xl border border-slate-700/50"
+      }
+    }
+  },
+  "components": {
+    "buttons": {
+      "primary": "h-12 px-8 rounded-full bg-gradient-to-r from-teal-600 to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300",
+      "secondary": "h-12 px-8 rounded-full bg-white text-slate-900 border border-slate-200 font-medium hover:bg-slate-50 transition-all duration-200",
+      "ghost": "text-slate-600 hover:text-teal-600 font-medium transition-colors"
+    },
+    "cards": {
+      "feature": "bg-white rounded-3xl p-8 border border-slate-100 shadow-card hover:shadow-hover transition-all duration-300 group relative overflow-hidden",
+      "bento_item": "bg-slate-50/50 rounded-3xl p-8 border border-slate-200/60 hover:bg-white hover:border-teal-100 transition-all duration-300"
+    },
+    "inputs": {
+      "default": "h-12 rounded-xl border-slate-200 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-teal-500/20 transition-all"
+    }
+  },
+  "layout_strategies": {
+    "hero": {
+      "type": "Orbiting Center",
+      "description": "Central typography 'Autoloops' with 'Agent Cards' floating/orbiting around it. Background has subtle moving gradient mesh.",
+      "structure": "Flex column centered. H1 is massive. CTA below. Floating elements absolute positioned."
+    },
+    "features": {
+      "type": "Bento Grid (Mode A)",
+      "description": "Asymmetrical grid. Mix of tall cards (vertical lists), wide cards (dashboard previews), and small cards (stats).",
+      "grid_class": "grid grid-cols-1 md:grid-cols-3 gap-6"
+    },
+    "video_section": {
+      "type": "Cinema Container",
+      "description": "Large container with heavy shadow and glass border. Video player inside. Background pattern behind container.",
+      "container_class": "max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border-4 border-white/50"
+    }
+  },
+  "assets": {
+    "images": [
+      {
+        "category": "Hero Background",
+        "url": "https://images.unsplash.com/photo-1767474604678-e32410f62d1f?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "description": "Abstract blue/white pattern. Use with opacity-10 or opacity-20 as overlay."
+      },
+      {
+        "category": "Feature - Analytics",
+        "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "description": "Dashboard analytics screen. Use inside a device frame or bento card."
+      },
+      {
+        "category": "Feature - Team",
+        "url": "https://images.unsplash.com/photo-1618544976420-1f213fcf2052?crop=entropy&cs=srgb&fm=jpg&q=85",
+        "description": "Professional working on laptop. Use for 'Collaboration' section."
+      },
+      {
+        "category": "Logo",
+        "url": "https://customer-assets.emergentagent.com/job_5837fc7d-bec0-4081-8e2e-fc389de70796/artifacts/hsuz0zsw_Gemini_Generated_Image_ksrag6ksrag6ksra.png",
+        "description": "Autoloops Logo. Use in Navbar and Footer."
+      },
+      {
+        "category": "Reference - Card",
+        "url": "https://customer-assets.emergentagent.com/job_5837fc7d-bec0-4081-8e2e-fc389de70796/artifacts/7m5vq9bd_Card.png",
+        "description": "Style reference for UI cards."
+      },
+      {
+        "category": "Reference - Chatbox",
+        "url": "https://customer-assets.emergentagent.com/job_5837fc7d-bec0-4081-8e2e-fc389de70796/artifacts/pw81g1rn_chatbox.png",
+        "description": "Style reference for Chat interface."
+      }
+    ],
+    "icons": "Use 'lucide-react' for all UI icons. Use 'framer-motion' for animated icons if needed."
+  },
+  "motion_guidelines": {
+    "library": "framer-motion",
+    "principles": [
+      "Stagger children for lists/grids (0.1s delay).",
+      "Use spring physics for hover scales (stiffness: 400, damping: 17).",
+      "Scroll reveals: y: 20 -> y: 0, opacity: 0 -> 1.",
+      "Parallax: Use useScroll and useTransform for background elements."
+    ]
+  },
+  "instructions_to_main_agent": [
+    "1. INSTALL DEPENDENCIES: npm install framer-motion lucide-react clsx tailwind-merge",
+    "2. SETUP FONTS: Add Outfit and Plus Jakarta Sans via Google Fonts in index.html or CSS.",
+    "3. HERO IMPLEMENTATION: Create a 'Hero' component. Use the 'Orbiting' concept. The 'Autoloops' text is central. Create 3-4 'Agent Cards' (small glass cards with icons/text) that float around the text using absolute positioning and framer-motion animate={{ y: [0, -20, 0] }} loops.",
+    "4. VIDEO SECTION: Create a placeholder div with aspect-video. Use the 'Cinema Container' style. Add a 'Play' button overlay that fades out on click.",
+    "5. FEATURES: Build a Bento Grid. Don't just use equal columns. Span some items 2 cols, some 1. Use the 'cards.bento_item' style.",
+    "6. COPYWRITING: Rewrite generic copy. Instead of 'We do AI', say 'Scale Meta Ads on Autopilot'. Use the tone of 'Magic' and 'Efficiency'.",
+    "7. LOGO: Ensure the logo is visible in the nav. If the background is dark in the footer, use a white version (filter: brightness(0) invert(1)).",
+    "8. TESTING: Add data-testid to all buttons and inputs."
+  ],
+  "universal_guidelines": [
+    "Do not use gradients for text unless it's a very large heading.",
+    "Avoid pure black (#000000). Use Slate-900 or Slate-950.",
+    "Ensure all interactive elements have a hover state.",
+    "Use 'gap' properties for spacing, avoid margins on children where possible.",
+    "Mobile Responsiveness: Stack everything on mobile. Reduce text sizes."
+  ]
+}
