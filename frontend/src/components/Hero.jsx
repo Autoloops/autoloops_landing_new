@@ -99,7 +99,7 @@ const Hero = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold tracking-tight leading-none mb-6 max-w-5xl"
           >
             <span className="inline-block">AI Agents that{' '}
-            <span className="bg-gradient-to-r from-teal-700 to-sky-500 bg-clip-text text-transparent whitespace-nowrap">
+            <span className="bg-gradient-to-r from-teal-700 to-sky-500 bg-clip-text text-transparent sm:whitespace-nowrap">
               scale your Meta ads
             </span></span>
           </motion.h1>
