@@ -117,7 +117,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 1 }}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex justify-center"
           >
             <a
               href="https://calendly.com/anirudh-autoloops/30min"
@@ -128,12 +128,6 @@ const Hero = () => {
             >
               Contact Us
             </a>
-            <button
-              data-testid="hero-demo-button"
-              className="h-14 px-10 rounded-full bg-white text-slate-900 border-2 border-slate-200 font-semibold text-lg hover:bg-slate-50 hover:border-teal-200 transition-all duration-200"
-            >
-              Watch Demo
-            </button>
           </motion.div>
         </div>
       </div>
