@@ -54,6 +54,7 @@ const Hero = () => {
                 <img
                   src="/assets/images/hero-frame-1.png"
                   alt="Winning Creative Ideas"
+                  loading="lazy"
                   className="relative w-64 h-auto rounded-2xl shadow-xl"
                 />
               </motion.div>
@@ -84,6 +85,7 @@ const Hero = () => {
                 <img
                   src="/assets/images/hero-frame-2.png"
                   alt="Weekly Reports"
+                  loading="lazy"
                   className="relative w-64 h-auto rounded-2xl shadow-xl"
                 />
               </motion.div>

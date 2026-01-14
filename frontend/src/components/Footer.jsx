@@ -24,17 +24,19 @@ const Footer = () => {
                 href="https://www.linkedin.com/company/auto-loops"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Visit Autoloops on LinkedIn"
                 className="w-10 h-10 rounded-full bg-slate-800 hover:bg-teal-600 flex items-center justify-center transition-colors"
                 data-testid="footer-linkedin-link"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="w-5 h-5" aria-hidden="true" />
               </a>
               <a
                 href="mailto:anirudh@autoloops.ai"
+                aria-label="Contact Autoloops via email"
                 className="w-10 h-10 rounded-full bg-slate-800 hover:bg-teal-600 flex items-center justify-center transition-colors"
                 data-testid="footer-email-link"
               >
-                <Mail className="w-5 h-5" />
+                <Mail className="w-5 h-5" aria-hidden="true" />
               </a>
             </div>
           </div>

@@ -7,13 +7,16 @@ import Footer from '../components/Footer';
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen">
+    <>
       <Navbar />
-      <Hero />
-      <VideoSection />
-      <Features />
+      <main className="min-h-screen">
+        <Hero />
+        {/* Commented out sections - can be restored when needed */}
+        {/* <VideoSection /> */}
+        <Features />
+      </main>
       <Footer />
-    </div>
+    </>
   );
 };
 

@@ -66,6 +66,7 @@ const VideoSection = () => {
                   <img
                     src="/assets/images/video-placeholder.jpg"
                     alt="Dashboard Preview"
+                    loading="lazy"
                     className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/50 to-transparent"></div>

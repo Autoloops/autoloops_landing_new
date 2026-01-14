@@ -1,0 +1,9 @@
+# robots.txt for Autoloops
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://autoloops.ai/sitemap.xml
+
+# Crawl delay (optional, can be removed if not needed)
+Crawl-delay: 1

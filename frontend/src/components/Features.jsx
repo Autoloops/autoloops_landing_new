@@ -62,8 +62,9 @@ const Features = () => {
   return (
     <section id="features" className="py-24 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24">
+        {/* Commented out sections - can be restored when needed */}
         {/* Section Header */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -82,10 +83,10 @@ const Features = () => {
           <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
             Autoloops combines cutting-edge AI with deep Meta advertising expertise to give you an unfair advantage.
           </p>
-        </motion.div>
+        </motion.div> */}
 
         {/* Feature Grid - 6 tiles in 2 rows */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-32">
           {features.map((feature, index) => (
             <FeatureCard
               key={index}
@@ -95,7 +96,7 @@ const Features = () => {
               delay={index * 0.1}
             />
           ))}
-        </div>
+        </div> */}
 
         {/* CTA Section */}
         <motion.div
@@ -115,7 +116,7 @@ const Features = () => {
               Ready to Scale Your Meta Ads?
             </h2>
             <p className="text-xl text-slate-300 mb-8 max-w-2xl mx-auto">
-              Join hundreds of growth teams using AI to achieve breakthrough performance
+              Launch video coming soon!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
