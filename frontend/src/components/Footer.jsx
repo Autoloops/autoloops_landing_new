@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Linkedin, Mail } from 'lucide-react';
 
 const Footer = () => {
@@ -48,9 +49,9 @@ const Footer = () => {
             © {new Date().getFullYear()} Autoloops. All rights reserved.
           </p>
           <div className="flex gap-8 text-slate-400 text-sm">
-            <a href="#" className="hover:text-white transition-colors">
+            <Link to="/privacy" className="hover:text-white transition-colors">
               Privacy Policy
-            </a>
+            </Link>
             <a href="#" className="hover:text-white transition-colors">
               Terms of Service
             </a>
