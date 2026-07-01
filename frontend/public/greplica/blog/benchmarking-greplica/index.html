@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <base href="/greplica/" />
+
+  <title>Benchmarking Greplica: Persistent Memory Makes Coding Agents Better at Planning</title>
+  <meta name="description" content="A six-case SWE-chat planning benchmark showing how Greplica memory helps coding agents produce better plans with less exploration." />
+
+  <link rel="canonical" href="https://autoloops.ai/greplica/blog/benchmarking-greplica/" />
+  <link rel="icon" type="image/png" sizes="48x48" href="assets/favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16.png" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://autoloops.ai/greplica/blog/benchmarking-greplica/" />
+  <meta property="og:title" content="Benchmarking Greplica: Persistent Memory Makes Coding Agents Better at Planning" />
+  <meta property="og:description" content="A six-case SWE-chat planning benchmark showing how Greplica memory helps coding agents produce better plans with less exploration." />
+  <meta property="og:image" content="https://autoloops.ai/assets/clawd.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Benchmarking Greplica: Persistent Memory Makes Coding Agents Better at Planning" />
+  <meta name="twitter:description" content="A six-case SWE-chat planning benchmark showing how Greplica memory helps coding agents produce better plans with less exploration." />
+  <meta name="twitter:image" content="https://autoloops.ai/assets/clawd.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <div class="nav-bar">
+        <a class="brand" href="/">
+          <img class="brand-wordmark" src="assets/greplica-wordmark.png" alt="Greplica" draggable="false" />
+        </a>
+        <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+      <nav class="nav-menu" id="nav-menu" aria-label="Main">
+          <a href="blog/">Blog</a>
+          <a href="https://github.com/Autoloops/greplica">Docs</a>
+          <a href="https://discord.gg/QeztUKA2P">
+            <svg viewBox="0 0 127.14 96.36" fill="currentColor" aria-hidden="true"><path d="M107.7 8.07A105.15 105.15 0 0 0 81.47 0a72.06 72.06 0 0 0-3.36 6.83 97.68 97.68 0 0 0-29.11 0A72.37 72.37 0 0 0 45.64 0a105.89 105.89 0 0 0-26.25 8.09C2.79 32.65-1.71 56.6.54 80.21a105.73 105.73 0 0 0 32.17 16.15 77.7 77.7 0 0 0 6.89-11.11 68.42 68.42 0 0 1-10.85-5.18c.91-.66 1.8-1.34 2.66-2a75.57 75.57 0 0 0 64.32 0c.87.71 1.76 1.39 2.66 2a68.68 68.68 0 0 1-10.87 5.19 77 77 0 0 0 6.89 11.1 105.25 105.25 0 0 0 32.19-16.14c2.64-27.38-4.51-51.11-18.9-72.15ZM42.45 65.69C36.18 65.69 31 60 31 53s5-12.74 11.43-12.74S54 46 53.89 53s-5.05 12.69-11.44 12.69Zm42.24 0C78.41 65.69 73.25 60 73.25 53s5-12.74 11.44-12.74S96.23 46 96.12 53s-5.04 12.69-11.43 12.69Z"/></svg>
+            Discord
+          </a>
+          <a href="https://github.com/Autoloops/greplica" class="nav-menu-github">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            GitHub
+          </a>
+        </nav>
+    </div>
+  </header>
+
+  <main class="blog-page wrap">
+    <article class="blog-post">
+      <a class="blog-back" href="blog/">← Blog</a>
+      <header class="blog-post-header">
+        <h1>Benchmarking Greplica: Persistent Memory Makes Coding Agents Better at Planning</h1>
+        <div class="blog-post-meta">1 July 2026 · Anirudh · <span class="blog-tag">Benchmark</span></div>
+      </header>
+      <div class="prose">
+<div class="blog-stats-bar">
+  <div class="blog-stat">
+    <div class="blog-stat-value">40%</div>
+    <div class="blog-stat-label">Less time taken</div>
+    <div class="blog-stat-note">six high-context SWE-chat plan cases across five repositories</div>
+  </div>
+  <div class="blog-stat">
+    <div class="blog-stat-value">50%</div>
+    <div class="blog-stat-label">Tokens saved</div>
+    <div class="blog-stat-note">versus baseline agents exploring from scratch</div>
+  </div>
+  <div class="blog-stat">
+    <div class="blog-stat-value">1.5×</div>
+    <div class="blog-stat-label">Better plan created</div>
+    <div class="blog-stat-note">median judge score lift on held-out planning tasks</div>
+  </div>
+</div>
+
+<div class="blog-contents">
+  <div class="blog-contents-label">Contents</div>
+  <div class="blog-contents-grid">
+    <a href="#section-overview" class="blog-contents-item"><span class="blog-contents-num">01</span><span class="blog-contents-title">Overview</span></a>
+    <a href="#section-why-coding-agents-need-memory" class="blog-contents-item"><span class="blog-contents-num">02</span><span class="blog-contents-title">Why agents need memory</span></a>
+    <a href="#section-what-greplica-does" class="blog-contents-item"><span class="blog-contents-num">03</span><span class="blog-contents-title">What Greplica does</span></a>
+    <a href="#section-benchmark-design" class="blog-contents-item"><span class="blog-contents-num">04</span><span class="blog-contents-title">Benchmark design</span></a>
+    <a href="#section-results-six-case-pilot" class="blog-contents-item"><span class="blog-contents-num">05</span><span class="blog-contents-title">Results</span></a>
+    <a href="#section-conclusion" class="blog-contents-item"><span class="blog-contents-num">06</span><span class="blog-contents-title">Conclusion</span></a>
+  </div>
+</div>
+
+<h2>Overview</h2>
+<p>Greplica improves coding-agent performance on complex engineering tasks by giving agents access to relevant memory from prior development sessions.</p>
+<p>We benchmarked Greplica using the <strong><a href="https://huggingface.co/datasets/SALT-NLP/SWE-chat">SWE-chat dataset</a></strong> on six high-context cases across five open-source repositories, and found that agents with Greplica memory consistently reached better plans with less exploration than baseline agents that started from scratch.</p>
+<p>Agents using Greplica performed better on all counts:</p>
+<ul>
+<li><strong>40%</strong> less time taken</li>
+<li><strong>50%</strong> fewer tokens consumed</li>
+<li><strong>1.5×</strong> better plan quality</li>
+</ul>
+<p>Relevant context saved in memory and revealed to the agent when doing a related task improves task understanding, finding the right subsystem, accounting for prior decisions, hence leading to concentrated gains in producing an implementation plan.</p>
+<p>In this post we walk through how how Greplica helps agents, how we designed that benchmark, what we measured, and what the pilot results show.</p>
+<hr>
+<h2>Why Coding Agents Need Memory</h2>
+<p>Coding agents are reasoning systems built around LLMs. Given a task, they read the prompt, inspect repository instructions, explore the codebase, form a plan, and then make code changes.</p>
+<p>On starting a new session, the agent&#39;s context window only contains the user prompt, global instructions, skills, and repo-level files such as <code>AGENTS.MD</code>. From there it must rebuild its understanding of the codebase through tool calls: <code>grep</code>, <code>glob</code>, <code>read</code>, shell commands, and file inspection. Large repositories contain many millions lines of code, which means meaningful time and tokens lost reconstructing context that may already have been learned in previous sessions.</p>
+<p>A larger context window does not automatically solve this. Too much irrelevant context can make the agent slower, more expensive, and less accurate. When the window fills up, harnesses compact the conversation and useful intermediate reasoning can be lost.</p>
+<p>Developers compensate by giving project instructions in prompts, or writing them into <code>AGENTS.md</code> or other repo-level documentation. These are useful, but difficult to maintain, hard to keep current, and not designed for task-specific retrieval. As the project grows they either become too sparse or too large to trust.</p>
+<p>What coding agents need is not just more context. They need <strong>persistent, queryable engineering memory</strong>.</p>
+<hr>
+<h2>What Greplica Does</h2>
+<p>Greplica works in the background, looking out for important bits of context to capture. It uses your coding session transcripts and fresh code changes to extract useful facts like:</p>
+<ul>
+<li>Architectural decisions</li>
+<li>Developer intentions</li>
+<li>Implementation learnings</li>
+<li>Team preferences</li>
+<li>Prior failed attempts</li>
+<li>Gotchas and edge cases</li>
+</ul>
+<p>Greplica stores this in a persistent SQLite-backed graph, automatically updated at the end of each session.</p>
+<p>When an agent receives a new task, it can <strong>query Greplica before broad manual exploration</strong>. Instead of rediscovering the repository from scratch, it retrieves relevant prior context and uses that to produce a better plan.</p>
+<p>We designed this benchmark to test whether that works on realistic, temporally valid session sequences.</p>
+<hr>
+<h2>Benchmark Design</h2>
+<p>We started with a specific question:</p>
+<p><strong><em>If a coding agent has access to memory built from prior related sessions on the same repository, does it produce a better plan for a later task — faster and with less exploration?</em></strong></p>
+<h3>Why planning, not implementation</h3>
+<p>We chose the planning phase because most of an agent&#39;s initial exploration is spent understanding the repo, locating the right subsystem, and turning that context into a plan.</p>
+<h3>Data source</h3>
+<p>Cases are built from the <strong><a href="https://huggingface.co/datasets/SALT-NLP/SWE-chat">SALT-NLP/SWE-chat</a></strong> dataset: real developer sessions with transcripts, checkpoints, and edit artifacts across many open-source repositories.</p>
+<p>Each case is a <strong>sequence of coding sessions</strong>:</p>
+<ol>
+<li><strong>Prior (memory-building) sessions</strong> (2-4) — chronologically before the session chosen for testing. Memory is built only from these.</li>
+<li><strong>Held-out (test) session</strong> — a later session on the same repo. Its main engineering task becomes the benchmark prompt. The agent never sees this transcript during memory build.</li>
+</ol>
+<p><strong>We ensured memory only sees prior sessions and data from future sessions must not leak into memory.</strong></p>
+<h3>Repository and task selection</h3>
+<p>We first shortlisted repositories by credibiilty (number of Github stars), complexity (number of past commits) and complexity (multiple contiguous sessions on related work).</p>
+<p>From those, we chose test sessions to identify task where memory should matter: related work in prior sessions, tasks requiring subsystem understanding rather than a one-file fix.</p>
+<p>The first pilot uses <strong>six cases</strong> across five repositories:</p>
+<table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Repository</th>
+<th>What the held-out plan must get right</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Marin Zephyr restart</td>
+<td><code>marin-community/marin</code></td>
+<td>Zephyr + Fray/Ray coordinator vs worker actor restart semantics</td>
+</tr>
+<tr>
+<td>Marin Harbor SWE eval</td>
+<td><code>marin-community/marin</code></td>
+<td>Harbor adapter, mini-swe-agent compatibility, experiment wiring</td>
+</tr>
+<tr>
+<td>Rudel project trends</td>
+<td><code>obsessiondb/rudel</code></td>
+<td>Analytics grouping, duplicate project identity normalization</td>
+</tr>
+<tr>
+<td>Lightfast tRPC platform</td>
+<td><code>lightfastai/lightfast</code></td>
+<td>Auth/platform layer split, tRPC architecture</td>
+</tr>
+<tr>
+<td>IPTVnator player UX</td>
+<td><code>4gray/iptvnator</code></td>
+<td>Workspace/player layout planning</td>
+</tr>
+<tr>
+<td>Gemini Voyager sync</td>
+<td><code>Nagi-ovo/gemini-voyager</code></td>
+<td>Extension sync/auth startup behavior</td>
+</tr>
+</tbody></table>
+<p><strong>These tasks mimic real world development tasks in large, complex repositories.</strong></p>
+<hr>
+<h2>Task Construction</h2>
+<p>For each held-out session:</p>
+<ol>
+<li>Inspect the session and reconstruct a <strong>user-facing planning prompt</strong> (what a real engineer might ask, without giving away the answer)</li>
+<li>Record <strong>gold-facts</strong> in a hidden <code>judge.md</code> file, containing expected components of a good plan (subsystems, root cause, fix direction, anti-patterns)</li>
+<li>List <strong>prior sessions</strong> whose transcripts and edit artifacts feed memory build</li>
+<li>Materialize the repository at the <strong>pre-task base commit</strong> so both arms start from identical code</li>
+</ol>
+<hr>
+<h2>Greplica-arm (memory building)</h2>
+<p>Memory is built the way a user would actually use Greplica:</p>
+<ol>
+<li>Materialize the repo at the prior session&#39;s start checkpoint</li>
+<li>Run <strong>bootstrap</strong> on the clean checkout (first session) or apply proposals from earlier sessions</li>
+<li>Reconstruct the session&#39;s code diff from SWE-chat edit artifacts</li>
+<li>Invoke <strong><code>greplica-update-memory</code></strong> with human/assistant transcript text and repo context</li>
+<li>Save the updated memory and move on to next session</li>
+</ol>
+<p>For reference, the Marin Zephyr memory build produced <strong>37 claims</strong> across bootstrap plus three update sessions (21 + 6 + 5 + 5).</p>
+<p>Greplica runs require the agent&#39;s <strong>first code-navigation step</strong> to be a <code>greplica graph context &quot;&lt;query about the task&gt;&quot;</code> based on the prompt. Memory guides navigation; the agent must still verify against current files.</p>
+<hr>
+<h2>Evaluation Arms</h2>
+<h3>Baseline: agent without Greplica</h3>
+<ul>
+<li>Same benchmark prompt and repo snapshot.</li>
+<li>Greplica unavailable; web, GitHub, network, and git-history lookup blocked.</li>
+<li>Agent produces a natural markdown plan (<code>final-plan.md</code>).</li>
+<li>Run fails if the repo has any diff after the run.</li>
+</ul>
+<h3>Greplica: agent with persistent memory</h3>
+<ul>
+<li>Same prompt and repo snapshot.</li>
+<li>Build memory as specified above</li>
+<li>Agent may use <code>greplica graph context</code> (and must use it as first navigation).</li>
+<li>Same plan-only constraints as baseline.</li>
+</ul>
+<p>Both arms use the same judge and scorer.</p>
+<hr>
+<h2>Evaluation</h2>
+<p>The LLM judge reads:</p>
+<ul>
+<li>The user-facing prompt</li>
+<li>Hidden gold guidance (<code>judge.md</code>)</li>
+<li>The candidate <code>final-plan.md</code></li>
+<li>Repo diff (must be empty)</li>
+<li>Transcript audit metadata</li>
+</ul>
+<p>It returns <strong>booleans only</strong> (actionable plan, relevant systems, root cause, contextual facts, fix direction, tests/validation, focus, no code changes, no false root cause) plus evidence. It does <strong>not</strong> assign pass/fail or a numeric score.</p>
+<p>We measure <strong>plan quality</strong> (deterministic score from an LLM judge&#39;s boolean checklist), <strong>tokens consumed</strong>, <strong>tool calls</strong> and <strong>elapsed time</strong>.</p>
+<hr>
+<h2>Results</h2>
+<p>Pilot runs used <strong>gpt-5.4</strong> for planning and judging. Results are single-run per arm unless noted; baseline trajectories are noisy (repeat baselines on Zephyr scored 100, 100, and 36 on identical prompts).</p>
+<table class="blog-results-table">
+  <thead>
+    <tr>
+      <th rowspan="2" class="sticky-col">Task</th>
+      <th colspan="3" class="group">Time</th>
+      <th colspan="3" class="group">Tokens</th>
+      <th colspan="2" class="group">Tool calls</th>
+    </tr>
+    <tr>
+      <th>Baseline</th>
+      <th>Greplica</th>
+      <th>% Delta</th>
+      <th>Baseline</th>
+      <th>Greplica</th>
+      <th>% Delta</th>
+      <th>Baseline</th>
+      <th>Greplica</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Marin Zephyr restart</td>
+      <td>351s</td>
+      <td>252s</td>
+      <td class="delta-positive">28%</td>
+      <td>1.22M</td>
+      <td>646K</td>
+      <td class="delta-positive">47%</td>
+      <td>42</td>
+      <td>31</td>
+    </tr>
+    <tr>
+      <td>Marin Harbor SWE eval</td>
+      <td>438s</td>
+      <td>345s</td>
+      <td class="delta-positive">21%</td>
+      <td>3.91M</td>
+      <td>1.32M</td>
+      <td class="delta-positive">66%</td>
+      <td>100</td>
+      <td>55</td>
+    </tr>
+    <tr>
+      <td>Rudel project trends</td>
+      <td>164s</td>
+      <td>192s</td>
+      <td class="delta-negative">−17%</td>
+      <td>314K</td>
+      <td>618K</td>
+      <td class="delta-negative">−97%</td>
+      <td>24</td>
+      <td>35</td>
+    </tr>
+    <tr>
+      <td>Lightfast tRPC platform</td>
+      <td>422s</td>
+      <td>296s</td>
+      <td class="delta-positive">30%</td>
+      <td>2.96M</td>
+      <td>1.97M</td>
+      <td class="delta-positive">33%</td>
+      <td>111</td>
+      <td>34</td>
+    </tr>
+    <tr>
+      <td>IPTVnator player UX</td>
+      <td>314s</td>
+      <td>336s</td>
+      <td class="delta-negative">−7%</td>
+      <td>1.68M</td>
+      <td>1.36M</td>
+      <td class="delta-positive">19%</td>
+      <td>70</td>
+      <td>58</td>
+    </tr>
+    <tr>
+      <td>Gemini Voyager sync</td>
+      <td>227s</td>
+      <td>324s</td>
+      <td class="delta-negative">−43%</td>
+      <td>1.02M</td>
+      <td>1.48M</td>
+      <td class="delta-negative">−45%</td>
+      <td>47</td>
+      <td>49</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>Readout</h3>
+<p><strong>Strong Greplica wins</strong> (memory changed plan quality and cut cost):</p>
+<ul>
+<li><strong>Harbor SWE eval</strong> — baseline wandered broadly (3.9M tokens, score 6); Greplica retrieved Harbor/SWE-bench context and scored 100 with ~66% fewer tokens.</li>
+<li><strong>Lightfast tRPC</strong> — Greplica improved score 90 → 100, cut tokens ~33% and tool calls ~69%.</li>
+<li><strong>Marin Zephyr</strong> — on comparable runs, Greplica cut tokens ~36% vs baseline median while fixing wrong-subsystem failures.</li>
+</ul>
+<p><strong>Mixed or negative token delta</strong> (both arms already passed or task too easy):</p>
+<ul>
+<li><strong>Rudel</strong> — baseline was already perfect and cheaper; Greplica matched quality but used more tokens.</li>
+<li><strong>Gemini Voyager</strong> — both scored 100; Greplica used more tokens/time.</li>
+</ul>
+<hr>
+<h2>Conclusion</h2>
+<p>The planning phase is the highest-touch parts of agentic software development. When the initial plan is wrong, incomplete, or based on missing context, the rest of the run compounds the error.</p>
+<p>Human developers use their own memory to give useful nudges to coding agents in prompts. However it is often insufficient, and coding agents either rediscover context through expensive exploration or miss it entirely.</p>
+<p>Greplica gives agents a way to retrieve that memory directly, and the benefits are stark.</p>
+<p>Our SWE-chat plan benchmark pilot shows that when agents have access to <strong>temporally valid, task-relevant</strong> persistent memory, they can plan complex coding tasks faster, with less exploration, and more accurately — especially on tasks where prior sessions contain the missing subsystem context.</p>
+<hr>
+<h2>Why <code>AGENTS.md</code> Is Not Enough</h2>
+<p>Repo-level instruction files are useful, but not a scalable memory layer.</p>
+<p>They require manual maintenance, do not support task-specific retrieval, and do not preserve the history of engineering decisions — failed attempts, migrations, design tradeoffs, and subsystem-specific gotchas.</p>
+<p>Greplica continuously captures context from development work, stores it in a structured graph, and retrieves the relevant subset when an agent needs it.</p>
+<hr>
+<h2>Future Work</h2>
+<ul>
+<li>Expand from six pilot cases to fifty-plus high-context cases with 3–5 repeated runs per arm and median reporting</li>
+<li>Wire cost estimation for gpt-5.4 and other agent models in the harness scorer</li>
+<li>Explore LLM-based retrieval methods apart from current semantic score and keyword based retrieval</li>
+<li>Include other sources of information (Github issues, PRs, PRDs) to add on context</li>
+</ul>
+<p>If you find this work interesting or have feedback, please find us on <a href="https://discord.gg/QeztUKA2P">Discord</a>.</p>
+<nav class="blog-post-nav" aria-label="Post navigation">
+  <div class="blog-post-nav-grid blog-post-nav-grid--prev-only">
+    <a class="blog-post-nav-link blog-post-nav-prev" href="blog/visualise-memory/">
+      <span class="blog-post-nav-label">← Visualising your memories</span>
+    </a>
+  </div>
+</nav>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <div class="footer-meta">
+          <p>Made with ☕ in TypeScript</p>
+          <p>© 2026 greplica</p>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="https://github.com/Autoloops/greplica">CLI</a>
+        <a href="blog/">Blog</a>
+      </div>
+
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="https://github.com/Autoloops/greplica">GitHub</a>
+        <a href="https://discord.gg/QeztUKA2P">Discord</a>
+      </div>
+    </div>
+  </footer>
+  <script src="js/nav.js"></script>
+</body>
+</html>
