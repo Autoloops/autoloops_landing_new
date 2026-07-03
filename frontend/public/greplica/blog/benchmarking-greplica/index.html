@@ -162,40 +162,56 @@
 <p>We measure <strong>plan quality</strong> (LLM-judge&#39;s boolean scores across multiple dimensions in judge.md), <strong>tokens consumed</strong>, <strong>tool calls</strong> and <strong>elapsed time</strong>.</p>
 <p>Pilot runs used <strong>gpt-5.4</strong> for planning and judging. Results are single-run per arm unless noted; baseline trajectories can be noisy on identical prompts.</p>
 <p>Across the selected top 10 tasks:</p>
-<table class="blog-results-table">
-  <thead>
-    <tr>
-      <th>Metric</th>
-      <th>Baseline</th>
-      <th>Greplica</th>
-      <th>Saved</th>
-      <th>% Delta</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Cost</td>
-      <td>$12.34</td>
-      <td>$7.09</td>
-      <td>$5.25</td>
-      <td class="delta-positive">43%</td>
-    </tr>
-    <tr>
-      <td>Time taken</td>
-      <td>59.7 min</td>
-      <td>43.9 min</td>
-      <td>15.8 min</td>
-      <td class="delta-positive">26%</td>
-    </tr>
-    <tr>
-      <td>Tool calls</td>
-      <td>694</td>
-      <td>447</td>
-      <td>247</td>
-      <td class="delta-positive">36%</td>
-    </tr>
-  </tbody>
-</table>
+<div class="blog-results-chart" aria-label="Average benchmark results comparing baseline and Greplica">
+  <div class="blog-results-chart-row">
+    <div class="blog-results-chart-label">
+      <span>Cost</span>
+      <strong>43% less</strong>
+    </div>
+    <div class="blog-results-bars">
+      <div class="blog-results-bar blog-results-bar--baseline" style="--bar-width: 100%;">
+        <span>Baseline</span>
+        <strong>$12.34</strong>
+      </div>
+      <div class="blog-results-bar blog-results-bar--greplica" style="--bar-width: 57.5%;">
+        <span>Greplica</span>
+        <strong>$7.09</strong>
+      </div>
+    </div>
+  </div>
+  <div class="blog-results-chart-row">
+    <div class="blog-results-chart-label">
+      <span>Time taken</span>
+      <strong>26% less</strong>
+    </div>
+    <div class="blog-results-bars">
+      <div class="blog-results-bar blog-results-bar--baseline" style="--bar-width: 100%;">
+        <span>Baseline</span>
+        <strong>59.7 min</strong>
+      </div>
+      <div class="blog-results-bar blog-results-bar--greplica" style="--bar-width: 73.5%;">
+        <span>Greplica</span>
+        <strong>43.9 min</strong>
+      </div>
+    </div>
+  </div>
+  <div class="blog-results-chart-row">
+    <div class="blog-results-chart-label">
+      <span>Tool calls</span>
+      <strong>36% fewer</strong>
+    </div>
+    <div class="blog-results-bars">
+      <div class="blog-results-bar blog-results-bar--baseline" style="--bar-width: 100%;">
+        <span>Baseline</span>
+        <strong>694</strong>
+      </div>
+      <div class="blog-results-bar blog-results-bar--greplica" style="--bar-width: 64.4%;">
+        <span>Greplica</span>
+        <strong>447</strong>
+      </div>
+    </div>
+  </div>
+</div>
 
 <p>Per task:</p>
 <div class="blog-table-frame blog-table-frame--flush">
