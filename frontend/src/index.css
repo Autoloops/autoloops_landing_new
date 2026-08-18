@@ -87,6 +87,23 @@ html {
   animation: launch-blink 1s infinite;
 }
 
+.waitlist-modal input {
+  width: 100%;
+  box-sizing: border-box;
+}
+.waitlist-modal input::-webkit-contacts-auto-fill-button,
+.waitlist-modal input::-webkit-credentials-auto-fill-button,
+.waitlist-modal input::-webkit-caps-lock-indicator {
+  visibility: hidden;
+  display: none !important;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
 /* Subtle grid pattern for dark surfaces */
 .grid-bg {
   background-image:

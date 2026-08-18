@@ -1,5 +1,7 @@
 function config() {
-  const url = String(process.env.SUPABASE_URL || "").replace(/\/$/, "");
+  const url = String(process.env.SUPABASE_URL || "")
+    .replace(/\/rest\/v1\/?$/i, "")
+    .replace(/\/$/, "");
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) {
     const err = new Error("Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY.");

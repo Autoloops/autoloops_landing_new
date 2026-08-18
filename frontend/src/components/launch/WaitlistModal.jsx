@@ -9,7 +9,7 @@ function fieldErrors(name, email) {
 }
 
 const inputClass = (invalid) =>
-  `rounded-none border bg-[#fbfaf7] px-3.5 py-3 font-jetbrains text-xs text-[#141414] outline-none placeholder:text-[#aaa] focus:border-[#0d7a3f] ${
+  `w-full rounded-none border bg-[#fbfaf7] px-3.5 py-3 font-jetbrains text-xs text-[#141414] outline-none placeholder:text-[#aaa] focus:border-[#0d7a3f] ${
     invalid ? "border-[#b3261e]" : "border-[#141414]"
   }`;
 
@@ -97,10 +97,10 @@ const WaitlistModal = ({ open, onClose }) => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="waitlist-title"
-        className="w-[420px] max-w-[90vw] rounded-none border border-[#141414] bg-[#fbfaf7]"
+        className="waitlist-modal w-[420px] max-w-[90vw] rounded-none border border-[#141414] bg-[#fbfaf7]"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="flex items-center justify-between border-b border-[#141414] px-5 py-3 font-jetbrains text-[10.5px]">
+        <div className="flex items-center justify-between border-b border-[#141414] px-6 py-3 font-jetbrains text-[10.5px]">
           <span>WAITLIST</span>
           <button
             type="button"
@@ -112,7 +112,7 @@ const WaitlistModal = ({ open, onClose }) => {
           </button>
         </div>
         {sent ? (
-          <div className="px-5 py-8 text-center">
+          <div className="px-6 py-8 text-center">
             <div className="font-jetbrains text-xs font-bold text-[#0d7a3f]">
               ✓ YOU'RE ON THE LIST
             </div>
@@ -121,7 +121,7 @@ const WaitlistModal = ({ open, onClose }) => {
             </p>
           </div>
         ) : (
-          <form className="flex flex-col gap-3 px-5 py-6" onSubmit={submit} autoComplete="off">
+          <form className="flex flex-col gap-3 px-6 py-6" onSubmit={submit} autoComplete="off">
             <div id="waitlist-title" className="text-xl font-extrabold tracking-[-0.02em]">
               Get early access
             </div>
@@ -133,9 +133,12 @@ const WaitlistModal = ({ open, onClose }) => {
                   if (errors.name) setErrors((prev) => ({ ...prev, name: "" }));
                 }}
                 placeholder="name"
+                name="waitlist-display"
                 autoComplete="off"
                 autoCorrect="off"
                 spellCheck={false}
+                data-1p-ignore="true"
+                data-lpignore="true"
                 aria-invalid={Boolean(errors.name)}
                 className={inputClass(errors.name)}
               />
@@ -148,13 +151,13 @@ const WaitlistModal = ({ open, onClose }) => {
             <div>
               <input
                 type="text"
-                inputMode="email"
                 value={email}
                 onChange={(event) => {
                   setEmail(event.target.value);
                   if (errors.email) setErrors((prev) => ({ ...prev, email: "" }));
                 }}
                 placeholder="you@company.com"
+                name="waitlist-contact"
                 autoComplete="off"
                 autoCorrect="off"
                 spellCheck={false}
@@ -175,7 +178,7 @@ const WaitlistModal = ({ open, onClose }) => {
             <button
               type="submit"
               disabled={saving}
-              className="cursor-pointer rounded-none border-0 bg-[#141414] px-0 py-[13px] font-archivo text-sm font-bold text-[#fbfaf7] hover:bg-[#0d7a3f] disabled:cursor-wait disabled:opacity-70"
+              className="w-full cursor-pointer rounded-none border-0 bg-[#141414] px-0 py-[13px] font-archivo text-sm font-bold text-[#fbfaf7] hover:bg-[#0d7a3f] disabled:cursor-wait disabled:opacity-70"
             >
               {saving ? "Saving…" : "Join waitlist →"}
             </button>
