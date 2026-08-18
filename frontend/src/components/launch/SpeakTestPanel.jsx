@@ -56,8 +56,8 @@ const SpeakTestPanel = () => {
   return (
     <div className="flex flex-col justify-center px-7 py-8">
       <div className="border border-[#141414] bg-[#fbfaf7]">
-        <div className="flex items-center justify-between border-b border-[#141414] px-4 py-3.5 font-jetbrains">
-          <span className="inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[14px] text-[#888]">
+        <div className="relative flex items-center justify-center border-b border-[#141414] px-4 py-3.5 font-jetbrains">
+          <span className="inline-flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[14px] text-[#888]">
             <span className="inline-flex items-center gap-2 font-bold text-[#141414]">
               <ModelMark src="/assets/logos/deepgram.svg" size={20} />
               Deepgram Nova-3
@@ -69,7 +69,7 @@ const SpeakTestPanel = () => {
             </span>
           </span>
           {isRecording && (
-            <span className="launch-blink text-[11px] text-[#b3261e]">
+            <span className="launch-blink absolute right-4 text-[11px] text-[#b3261e]">
               ● rec {formatClock(elapsedMs)}
             </span>
           )}
