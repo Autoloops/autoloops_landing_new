@@ -4,8 +4,8 @@
     { "source": "/greplica/blog", "destination": "/greplica/blog/index.html" },
     { "source": "/greplica/:path*", "destination": "/greplica/:path*" },
     { "source": "/greplica", "destination": "/greplica/index.html" },
-    { "source": "/privacy", "destination": "/platform.html" },
-    { "source": "/terms", "destination": "/platform.html" },
-    { "source": "/(.*)", "destination": "/platform.html" }
+    { "source": "/privacy", "destination": "/index.html" },
+    { "source": "/terms", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

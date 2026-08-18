@@ -100,6 +100,16 @@ webpackConfig.devServer = (devServerConfig) => {
     };
   }
 
+  const previousSetup = devServerConfig.setupMiddlewares;
+  const setupWaitlist = require("./plugins/waitlist-dev-middleware");
+  devServerConfig.setupMiddlewares = (middlewares, devServer) => {
+    if (typeof previousSetup === "function") {
+      middlewares = previousSetup(middlewares, devServer);
+    }
+    setupWaitlist(devServer);
+    return middlewares;
+  };
+
   return devServerConfig;
 };
 

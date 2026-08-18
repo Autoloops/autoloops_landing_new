@@ -8,3 +8,15 @@
   NPM_FLAGS = "--legacy-peer-deps"
   NETLIFY_USE_YARN = "false"
   NODE_OPTIONS = "--max-old-space-size=4096"
+
+# Set WAITLIST_VIEW_KEY, SUPABASE_URL, and SUPABASE_SERVICE_ROLE_KEY
+# in the Netlify UI (Site settings → Environment variables).
+# Do not put secrets in this file.
+[functions]
+  directory = "frontend/netlify/functions"
+
+[[redirects]]
+  from = "/api/waitlist"
+  to = "/.netlify/functions/waitlist"
+  status = 200
+  force = true

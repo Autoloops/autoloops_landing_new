@@ -1,7 +1,6 @@
+/api/waitlist          /.netlify/functions/waitlist  200
 /greplica              /greplica/index.html   200
 /greplica/blog         /greplica/blog/index.html   200
 /greplica/blog/        /greplica/blog/index.html   200
 /greplica/blog/*       /greplica/blog/:splat   200
-/privacy               /platform.html   200
-/terms                 /platform.html   200
-/*                     /platform.html   200
+/*                     /index.html   200

@@ -39,7 +39,7 @@
     @apply border-border;
   }
   html {
-    background-color: var(--ink);
+    background-color: #fbfaf7;
   }
   body {
     @apply bg-background text-foreground;
@@ -60,6 +60,31 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+.launch-page {
+  font-family: 'Archivo', sans-serif;
+  color: #141414;
+  background-color: #fbfaf7;
+  background-image:
+    linear-gradient(rgba(20, 20, 20, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 20, 20, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+.launch-page ::selection {
+  background: rgba(13, 122, 63, 0.18);
+  color: #141414;
+}
+
+@keyframes launch-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+.launch-blink {
+  animation: launch-blink 1.2s infinite;
+}
+.launch-blink-fast {
+  animation: launch-blink 1s infinite;
 }
 
 /* Subtle grid pattern for dark surfaces */
