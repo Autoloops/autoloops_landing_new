@@ -2,11 +2,15 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 
 const GRANT_URL = 'https://asr.autoloops.ai/api/grant';
 const DG_QUERY =
-  'model=nova-3&encoding=linear16&sample_rate=16000&channels=1&interim_results=true&punctuate=true&smart_format=false&language=en';
+  'model=nova-3&encoding=linear16&sample_rate=16000&channels=1&interim_results=true&punctuate=true&smart_format=false&language=multi';
 const QW_QUERY =
-  'encoding=linear16&sample_rate=16000&channels=1&interim_results=true&punctuate=true&language=en';
+  'encoding=linear16&sample_rate=16000&channels=1&interim_results=true&punctuate=true&language=multi&endpointing=800';
 const CLOSE_WAIT_MS = 1000;
 const FRAME_SAMPLES = 320;
+const VAD_RMS = 0.015;
+const VAD_VOICED_FRAMES = 3;
+const VAD_QUIET_FRAMES = 12;
+const MIN_RESP_MS = 120;
 
 const WORKLET_SOURCE = `
 class PcmCaptureProcessor extends AudioWorkletProcessor {
@@ -60,12 +64,43 @@ function emptyPane() {
     interim: '',
     connectMs: null,
     ttftMs: null,
+    respMs: null,
+    respMed: null,
     wordCount: 0,
     finalizeMs: null,
     totalMs: null,
     status: 'idle',
     error: null,
   };
+}
+
+function initMetrics() {
+  return {
+    lastLen: { dg: 0, qw: 0 },
+    respHistory: { dg: [], qw: [] },
+    pendingOnset: { dg: 0, qw: 0 },
+    vad: { voicedRun: 0, quietRun: 99 },
+  };
+}
+
+function frameRms(buffer) {
+  const samples = new Int16Array(buffer);
+  if (!samples.length) return 0;
+  let sum = 0;
+  for (let i = 0; i < samples.length; i += 1) {
+    const x = samples[i] / 32768;
+    sum += x * x;
+  }
+  return Math.sqrt(sum / samples.length);
+}
+
+function medianOf(values) {
+  if (!values.length) return null;
+  const sorted = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  return sorted.length % 2
+    ? sorted[mid]
+    : Math.round((sorted[mid - 1] + sorted[mid]) / 2);
 }
 
 function withQuery(base, query) {
@@ -192,6 +227,7 @@ export function useLiveAsr() {
     firstFrameAt: { dg: 0, qw: 0 },
     closeAt: { dg: 0, qw: 0 },
   });
+  const metricsRef = useRef(initMetrics());
   const sendingRef = useRef(false);
   const tickRef = useRef(null);
 
@@ -214,6 +250,19 @@ export function useLiveAsr() {
 
   const sendFrame = useCallback((buffer) => {
     if (!sendingRef.current) return;
+    const { vad, pendingOnset } = metricsRef.current;
+    if (frameRms(buffer) > VAD_RMS) {
+      vad.voicedRun += 1;
+      if (vad.voicedRun === VAD_VOICED_FRAMES && vad.quietRun >= VAD_QUIET_FRAMES) {
+        const onsetAt = Date.now() - (VAD_VOICED_FRAMES - 1) * 20;
+        pendingOnset.dg = onsetAt;
+        pendingOnset.qw = onsetAt;
+      }
+      if (vad.voicedRun >= VAD_VOICED_FRAMES) vad.quietRun = 0;
+    } else {
+      vad.voicedRun = 0;
+      vad.quietRun += 1;
+    }
     ['dg', 'qw'].forEach((key) => {
       const ws = socketsRef.current[key];
       if (!ws || ws.readyState !== WebSocket.OPEN) return;
@@ -333,6 +382,21 @@ export function useLiveAsr() {
       patch.interim = parsed.transcript;
     }
 
+    const stats = metricsRef.current;
+    const nextLen = paneText({
+      committed: patch.committed ?? pane.committed,
+      interim: patch.interim ?? pane.interim,
+    }).length;
+    if (nextLen > stats.lastLen[key]) {
+      const onsetAt = stats.pendingOnset[key];
+      if (onsetAt && now - onsetAt >= MIN_RESP_MS) {
+        patch.respMs = now - onsetAt;
+        stats.respHistory[key].push(patch.respMs);
+        stats.pendingOnset[key] = 0;
+      }
+      stats.lastLen[key] = nextLen;
+    }
+
     setPane(key, patch);
   }, [setPane]);
 
@@ -428,6 +492,7 @@ export function useLiveAsr() {
     sessionRef.current = session;
     paneRef.current = { dg: emptyPane(), qw: emptyPane() };
     timesRef.current = { startedAt: 0, firstFrameAt: { dg: 0, qw: 0 }, closeAt: { dg: 0, qw: 0 } };
+    metricsRef.current = initMetrics();
     setDeepgram(emptyPane());
     setQwen(emptyPane());
     setError(null);
@@ -539,12 +604,11 @@ export function useLiveAsr() {
     const total = timesRef.current.startedAt ? endedAt - timesRef.current.startedAt : null;
     ['dg', 'qw'].forEach((key) => {
       const pane = paneRef.current[key];
-      const closeAt = timesRef.current.closeAt[key];
       setPane(key, {
         status: pane.status === 'error' ? 'error' : 'done',
         interim: '',
         committed: paneText(pane),
-        finalizeMs: pane.finalizeMs ?? (closeAt ? endedAt - closeAt : null),
+        respMed: medianOf(metricsRef.current.respHistory[key]),
         totalMs: pane.totalMs ?? total,
       });
     });
@@ -558,6 +622,7 @@ export function useLiveAsr() {
     sessionRef.current += 1;
     teardown();
     paneRef.current = { dg: emptyPane(), qw: emptyPane() };
+    metricsRef.current = initMetrics();
     setDeepgram(emptyPane());
     setQwen(emptyPane());
     setError(null);

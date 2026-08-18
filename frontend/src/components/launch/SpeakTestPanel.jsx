@@ -12,11 +12,15 @@ function formatMeta(pane, isDone) {
   if (pane.error) return pane.error;
   if (pane.status === 'connecting') return 'connecting';
   const parts = [];
-  if (pane.ttftMs != null) parts.push(`${pane.ttftMs} ms ttft`);
-  else if (pane.connectMs != null && !isDone) parts.push(`${pane.connectMs} ms conn`);
-  if (isDone && pane.finalizeMs != null) parts.push(`${pane.finalizeMs} ms fin`);
-  if (isDone && pane.wordCount > 0) parts.push(`${pane.wordCount}w`);
-  if (isDone && pane.totalMs != null) parts.push(`${(pane.totalMs / 1000).toFixed(1)}s`);
+  if (!isDone) {
+    if (pane.wordCount > 0) parts.push(`${pane.wordCount}w`);
+    if (pane.respMs != null) parts.push(`${pane.respMs} ms resp`);
+    else if (pane.connectMs != null) parts.push(`${pane.connectMs} ms conn`);
+  } else {
+    if (pane.ttftMs != null) parts.push(`${pane.ttftMs} ms first`);
+    if (pane.respMed != null) parts.push(`~${pane.respMed} ms resp`);
+    if (pane.wordCount > 0) parts.push(`${pane.wordCount}w`);
+  }
   return parts.join(' · ');
 }
 
