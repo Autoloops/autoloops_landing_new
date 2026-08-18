@@ -15,11 +15,12 @@ function json(statusCode, body) {
   };
 }
 
-function fieldErrors(name, email) {
+function fieldErrors(email) {
   const fields = {};
-  if (!name) fields.name = "Enter your name.";
   if (!email) fields.email = "Enter your email.";
-  else if (!/.+@.+\..+/.test(email)) fields.email = "Enter a valid email.";
+  else if (!email.includes("@") || !/.+@.+\..+/.test(email)) {
+    fields.email = "Enter a valid email.";
+  }
   return fields;
 }
 
@@ -43,12 +44,13 @@ exports.handler = async (event) => {
       return json(400, { error: "Invalid request." });
     }
 
-    const name = String(payload.name || "").trim();
     const email = String(payload.email || "").trim().toLowerCase();
-    const fields = fieldErrors(name, email);
+    const fields = fieldErrors(email);
     if (Object.keys(fields).length) {
       return json(400, { error: Object.values(fields)[0], fields });
     }
+    const name =
+      String(payload.name || "").trim() || email.split("@")[0] || "waitlist";
 
     try {
       const entry = await addEntry({ name, email });

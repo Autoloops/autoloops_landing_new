@@ -87,13 +87,46 @@ html {
   animation: launch-blink 1s infinite;
 }
 
-.waitlist-modal input {
-  width: 100%;
-  box-sizing: border-box;
+.launch-new-badge {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
 }
-.waitlist-modal input::-webkit-contacts-auto-fill-button,
-.waitlist-modal input::-webkit-credentials-auto-fill-button,
-.waitlist-modal input::-webkit-caps-lock-indicator {
+.launch-new-badge::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 55%;
+  background: linear-gradient(
+    105deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 35%,
+    rgba(255, 255, 255, 0.7) 50%,
+    rgba(255, 255, 255, 0.08) 65%,
+    transparent 100%
+  );
+  transform: translateX(-160%) skewX(-18deg);
+  animation: launch-new-shine 2.6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes launch-new-shine {
+  0%, 15% { transform: translateX(-160%) skewX(-18deg); }
+  55%, 100% { transform: translateX(280%) skewX(-18deg); }
+}
+
+@keyframes launch-email-in {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.launch-email-box {
+  margin-top: 14px;
+  animation: launch-email-in 0.35s ease;
+}
+.launch-email-box input::-webkit-contacts-auto-fill-button,
+.launch-email-box input::-webkit-credentials-auto-fill-button,
+.launch-email-box input::-webkit-caps-lock-indicator {
   visibility: hidden;
   display: none !important;
   pointer-events: none;

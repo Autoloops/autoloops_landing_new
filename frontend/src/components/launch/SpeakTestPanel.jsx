@@ -20,6 +20,20 @@ function formatMeta(pane, isDone) {
   return parts.join(' · ');
 }
 
+function ModelMark({ src, size = 16 }) {
+  return (
+    <img
+      src={src}
+      alt=""
+      width={size}
+      height={size}
+      className="shrink-0 object-contain"
+      style={{ width: size, height: size }}
+      aria-hidden="true"
+    />
+  );
+}
+
 const SpeakTestPanel = () => {
   const {
     phase,
@@ -42,14 +56,20 @@ const SpeakTestPanel = () => {
   return (
     <div className="flex flex-col justify-center px-7 py-8">
       <div className="border border-[#141414] bg-[#fbfaf7]">
-        <div className="flex items-center justify-between border-b border-[#141414] px-4 py-[13px] font-jetbrains text-[11px]">
-          <span className="text-[#888]">
-            <span className="font-bold text-[#141414]">Deepgram Nova-3</span>
-            {' '}v/s{' '}
-            <span className="font-bold text-[#141414]">Qwen3-ASR-1.7B</span>
+        <div className="flex items-center justify-between border-b border-[#141414] px-4 py-3.5 font-jetbrains">
+          <span className="inline-flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[14px] text-[#888]">
+            <span className="inline-flex items-center gap-2 font-bold text-[#141414]">
+              <ModelMark src="/assets/logos/deepgram.svg" size={20} />
+              Deepgram Nova-3
+            </span>
+            <span>v/s</span>
+            <span className="inline-flex items-center gap-2 font-bold text-[#141414]">
+              <ModelMark src="/assets/logos/qwen.svg" size={20} />
+              Qwen3-ASR-1.7B
+            </span>
           </span>
           {isRecording && (
-            <span className="launch-blink text-[#b3261e]">
+            <span className="launch-blink text-[11px] text-[#b3261e]">
               ● rec {formatClock(elapsedMs)}
             </span>
           )}
@@ -81,7 +101,10 @@ const SpeakTestPanel = () => {
           <>
             <div className="border-b border-[#141414] px-4 py-3.5">
               <div className="mb-1.5 flex justify-between gap-3 font-jetbrains text-[9.5px] text-[#888]">
-                <span>01 / deepgram nova-3</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <ModelMark src="/assets/logos/deepgram.svg" size={13} />
+                  01 / deepgram nova-3
+                </span>
                 {dgMeta && <span className="text-right">{dgMeta}</span>}
               </div>
               <p className="m-0 min-h-5 text-[12.5px] leading-[1.65] text-[#444]">
@@ -91,7 +114,10 @@ const SpeakTestPanel = () => {
             </div>
             <div className="border-b border-[#141414] bg-[rgba(13,122,63,.05)] px-4 py-3.5">
               <div className="mb-1.5 flex justify-between gap-3 font-jetbrains text-[9.5px] text-[#0d7a3f]">
-                <span>02 / qwen3-asr-1.7b · autoloops</span>
+                <span className="inline-flex items-center gap-1.5">
+                  <ModelMark src="/assets/logos/qwen.svg" size={13} />
+                  02 / qwen3-asr-1.7b · autoloops
+                </span>
                 {qwMeta && (
                   <span className={`text-right ${isDone ? 'font-bold' : ''}`}>{qwMeta}</span>
                 )}

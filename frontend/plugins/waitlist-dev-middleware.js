@@ -1,11 +1,12 @@
 const express = require("express");
 const { addEntry, listEntries } = require("../lib/waitlist-db");
 
-function fieldErrors(name, email) {
+function fieldErrors(email) {
   const fields = {};
-  if (!name) fields.name = "Enter your name.";
   if (!email) fields.email = "Enter your email.";
-  else if (!/.+@.+\..+/.test(email)) fields.email = "Enter a valid email.";
+  else if (!email.includes("@") || !/.+@.+\..+/.test(email)) {
+    fields.email = "Enter a valid email.";
+  }
   return fields;
 }
 
@@ -15,9 +16,10 @@ function setupWaitlist(devServer) {
   const json = express.json();
 
   devServer.app.post("/api/waitlist", json, async (req, res) => {
-    const name = String(req.body?.name || "").trim();
     const email = String(req.body?.email || "").trim().toLowerCase();
-    const fields = fieldErrors(name, email);
+    const fields = fieldErrors(email);
+    const name =
+      String(req.body?.name || "").trim() || email.split("@")[0] || "waitlist";
     if (Object.keys(fields).length) {
       return res.status(400).json({
         error: Object.values(fields)[0],
