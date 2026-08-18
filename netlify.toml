@@ -12,8 +12,11 @@
 # Set WAITLIST_VIEW_KEY, SUPABASE_URL, and SUPABASE_SERVICE_ROLE_KEY
 # in the Netlify UI (Site settings → Environment variables).
 # Do not put secrets in this file.
+# Paths are relative to [build].base (frontend/). The default would
+# also be netlify/functions; do not prefix with frontend/ again or
+# the waitlist function never deploys and /api/waitlist 404s as HTML.
 [functions]
-  directory = "frontend/netlify/functions"
+  directory = "netlify/functions"
 
 [[redirects]]
   from = "/api/waitlist"
